@@ -34,19 +34,20 @@ function buildTable() {
  * @param record {Object} - 包含行數據的記錄對象。
  * @return {jQuery} 返回添加的行元素。
  */
-function setTableRow($tbody, record = {}) {
+function setTableRow($tbody: JQuery, record: Record<string, unknown> = {}) {
     const $row = $('<tr>').addClass('vgtn-editable-row');
-    $row.append($('<th>')
+    const $th = $('<th>')
         .attr('scope', 'row')
         .css({
             'font-weight': 'normal', 'text-align': 'left'
         })
-        .html(EntryNameField(record).html()));
-    $row.append($('<td>').html(LinkVariableField(record).html()));
-    $row.append($('<td>').html(LocaleVariableField(record).html()));
-    $row.append($('<td>').html(CommentField(record).html()));
+        .append(EntryNameField(record) as any);
+    $row.append($th as any);
+    $row.append($('<td>').append(LinkVariableField(record) as any) as any);
+    $row.append($('<td>').append(LocaleVariableField(record) as any) as any);
+    $row.append($('<td>').append(CommentField(record) as any) as any);
 
-    $tbody.append($row);
+    $tbody.append($row as any);
     return $row;
 }
 
